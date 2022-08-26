@@ -31,36 +31,23 @@ x??	zero or one «x», prefer zero
 x{n,m}?	«n» or «n»+1 or ... or «m» «x», prefer fewer
 x{n,}?	«n» or more «x», prefer fewer
 x{n}?	exactly «n» «x»
-x{}	(== x*) NOT SUPPORTED vim
-x{-}	(== x*?) NOT SUPPORTED vim
-x{-n}	(== x{n}?) NOT SUPPORTED vim
-x=	(== x?) NOT SUPPORTED vim
+
 
 Implementation restriction: The counting forms «x{n,m}», «x{n,}», and «x{n}»
 reject forms that create a minimum or maximum repetition count above 1000.
 Unlimited repetitions are not subject to this restriction.
 
 Possessive repetitions:
-x*+	zero or more «x», possessive NOT SUPPORTED
-x++	one or more «x», possessive NOT SUPPORTED
-x?+	zero or one «x», possessive NOT SUPPORTED
-x{n,m}+	«n» or ... or «m» «x», possessive NOT SUPPORTED
-x{n,}+	«n» or more «x», possessive NOT SUPPORTED
-x{n}+	exactly «n» «x», possessive NOT SUPPORTED
+
 
 Grouping:
 (re)	numbered capturing group (submatch)
 (?P<name>re)	named & numbered capturing group (submatch)
-(?<name>re)	named & numbered capturing group (submatch) NOT SUPPORTED
-(?'name're)	named & numbered capturing group (submatch) NOT SUPPORTED
+
 (?:re)	non-capturing group
 (?flags)	set flags within current group; non-capturing
 (?flags:re)	set flags during re; non-capturing
-(?#text)	comment NOT SUPPORTED
-(?|x|y|z)	branch numbering reset NOT SUPPORTED
-(?>re)	possessive match of «re» NOT SUPPORTED
-re@>	possessive match of «re» NOT SUPPORTED vim
-%(re)	non-capturing group NOT SUPPORTED vim
+
 
 Flags:
 i	case-insensitive (default false)
@@ -75,29 +62,8 @@ $	at end of text (like «\z» not «\Z») or line («m»=true)
 \A	at beginning of text
 \b	at ASCII word boundary («\w» on one side and «\W», «\A», or «\z» on the other)
 \B	not at ASCII word boundary
-\G	at beginning of subtext being searched NOT SUPPORTED pcre
-\G	at end of last match NOT SUPPORTED perl
-\Z	at end of text, or before newline at end of text NOT SUPPORTED
+
 \z	at end of text
-(?=re)	before text matching «re» NOT SUPPORTED
-(?!re)	before text not matching «re» NOT SUPPORTED
-(?<=re)	after text matching «re» NOT SUPPORTED
-(?<!re)	after text not matching «re» NOT SUPPORTED
-re&	before text matching «re» NOT SUPPORTED vim
-re@=	before text matching «re» NOT SUPPORTED vim
-re@!	before text not matching «re» NOT SUPPORTED vim
-re@<=	after text matching «re» NOT SUPPORTED vim
-re@<!	after text not matching «re» NOT SUPPORTED vim
-\zs	sets start of match (= \K) NOT SUPPORTED vim
-\ze	sets end of match NOT SUPPORTED vim
-\%^	beginning of file NOT SUPPORTED vim
-\%$	end of file NOT SUPPORTED vim
-\%V	on screen NOT SUPPORTED vim
-\%#	cursor position NOT SUPPORTED vim
-\%'m	mark «m» position NOT SUPPORTED vim
-\%23l	in line 23 NOT SUPPORTED vim
-\%23c	in column 23 NOT SUPPORTED vim
-\%23v	in virtual column 23 NOT SUPPORTED vim
 
 Escape sequences:
 \a	bell (== \007)
@@ -112,34 +78,6 @@ Escape sequences:
 \x{10FFFF}	hex character code
 \C	match a single byte even in UTF-8 mode
 \Q...\E	literal text «...» even if «...» has punctuation
-
-\1	backreference NOT SUPPORTED
-\b	backspace NOT SUPPORTED (use «\010»)
-\cK	control char ^K NOT SUPPORTED (use «\001» etc)
-\e	escape NOT SUPPORTED (use «\033»)
-\g1	backreference NOT SUPPORTED
-\g{1}	backreference NOT SUPPORTED
-\g{+1}	backreference NOT SUPPORTED
-\g{-1}	backreference NOT SUPPORTED
-\g{name}	named backreference NOT SUPPORTED
-\g<name>	subroutine call NOT SUPPORTED
-\g'name'	subroutine call NOT SUPPORTED
-\k<name>	named backreference NOT SUPPORTED
-\k'name'	named backreference NOT SUPPORTED
-\lX	lowercase «X» NOT SUPPORTED
-\ux	uppercase «x» NOT SUPPORTED
-\L...\E	lowercase text «...» NOT SUPPORTED
-\K	reset beginning of «$0» NOT SUPPORTED
-\N{name}	named Unicode character NOT SUPPORTED
-\R	line break NOT SUPPORTED
-\U...\E	upper case text «...» NOT SUPPORTED
-\X	extended Unicode sequence NOT SUPPORTED
-
-\%d123	decimal character 123 NOT SUPPORTED vim
-\%xFF	hex character FF NOT SUPPORTED vim
-\%o123	octal character 123 NOT SUPPORTED vim
-\%u1234	Unicode character 0x1234 NOT SUPPORTED vim
-\%U12345678	Unicode character 0x12345678 NOT SUPPORTED vim
 
 Character class elements:
 x	single character
@@ -167,11 +105,6 @@ Perl character classes (all ASCII-only):
 \w	word characters (== [0-9A-Za-z_])
 \W	not word characters (== [^0-9A-Za-z_])
 
-\h	horizontal space NOT SUPPORTED
-\H	not horizontal space NOT SUPPORTED
-\v	vertical space NOT SUPPORTED
-\V	not vertical space NOT SUPPORTED
-
 ASCII character classes:
 [[:alnum:]]	alphanumeric (== [0-9A-Za-z])
 [[:alpha:]]	alphabetic (== [A-Za-z])
@@ -192,12 +125,9 @@ Unicode character class names--general category:
 C	other
 Cc	control
 Cf	format
-Cn	unassigned code points NOT SUPPORTED
 Co	private use
 Cs	surrogate
 L	letter
-LC	cased letter NOT SUPPORTED
-L&	cased letter NOT SUPPORTED
 Ll	lowercase letter
 Lm	modifier letter
 Lo	other letter
@@ -393,24 +323,15 @@ Yi
 Zanabazar_Square
 
 Vim character classes:
-\i	identifier character NOT SUPPORTED vim
-\I	«\i» except digits NOT SUPPORTED vim
-\k	keyword character NOT SUPPORTED vim
-\K	«\k» except digits NOT SUPPORTED vim
-\f	file name character NOT SUPPORTED vim
-\F	«\f» except digits NOT SUPPORTED vim
-\p	printable character NOT SUPPORTED vim
-\P	«\p» except digits NOT SUPPORTED vim
-\s	whitespace character (== [ \t]) NOT SUPPORTED vim
-\S	non-white space character (== [^ \t]) NOT SUPPORTED vim
 \d	digits (== [0-9]) vim
 \D	not «\d» vim
-\x	hex digits (== [0-9A-Fa-f]) NOT SUPPORTED vim
-\X	not «\x» NOT SUPPORTED vim
-\o	octal digits (== [0-7]) NOT SUPPORTED vim
-\O	not «\o» NOT SUPPORTED vim
 \w	word character vim
 \W	not «\w» vim
+
+
+----------------------------------------------------
+
+NOT SUPPORTED:
 \h	head of word character NOT SUPPORTED vim
 \H	not «\h» NOT SUPPORTED vim
 \a	alphabetic NOT SUPPORTED vim
@@ -458,3 +379,93 @@ Magic:
 (*LF)	NOT SUPPORTED
 (*BSR_ANYCRLF)	set \R convention NOT SUPPORTED pcre
 (*BSR_UNICODE)	NOT SUPPORTED pcre
+\x	hex digits (== [0-9A-Fa-f]) NOT SUPPORTED vim
+\X	not «\x» NOT SUPPORTED vim
+\o	octal digits (== [0-7]) NOT SUPPORTED vim
+\O	not «\o» NOT SUPPORTED vim
+\i	identifier character NOT SUPPORTED vim
+\I	«\i» except digits NOT SUPPORTED vim
+\k	keyword character NOT SUPPORTED vim
+\K	«\k» except digits NOT SUPPORTED vim
+\f	file name character NOT SUPPORTED vim
+\F	«\f» except digits NOT SUPPORTED vim
+\p	printable character NOT SUPPORTED vim
+\P	«\p» except digits NOT SUPPORTED vim
+\s	whitespace character (== [ \t]) NOT SUPPORTED vim
+\S	non-white space character (== [^ \t]) NOT SUPPORTED vim
+LC	cased letter NOT SUPPORTED
+L&	cased letter NOT SUPPORTED
+Cn	unassigned code points NOT SUPPORTED
+\h	horizontal space NOT SUPPORTED
+\H	not horizontal space NOT SUPPORTED
+\v	vertical space NOT SUPPORTED
+\V	not vertical space NOT SUPPORTED
+\1	backreference NOT SUPPORTED
+\b	backspace NOT SUPPORTED (use «\010»)
+\cK	control char ^K NOT SUPPORTED (use «\001» etc)
+\e	escape NOT SUPPORTED (use «\033»)
+\g1	backreference NOT SUPPORTED
+\g{1}	backreference NOT SUPPORTED
+\g{+1}	backreference NOT SUPPORTED
+\g{-1}	backreference NOT SUPPORTED
+\g{name}	named backreference NOT SUPPORTED
+\g<name>	subroutine call NOT SUPPORTED
+\g'name'	subroutine call NOT SUPPORTED
+\k<name>	named backreference NOT SUPPORTED
+\k'name'	named backreference NOT SUPPORTED
+\lX	lowercase «X» NOT SUPPORTED
+\ux	uppercase «x» NOT SUPPORTED
+\L...\E	lowercase text «...» NOT SUPPORTED
+\K	reset beginning of «$0» NOT SUPPORTED
+\N{name}	named Unicode character NOT SUPPORTED
+\R	line break NOT SUPPORTED
+\U...\E	upper case text «...» NOT SUPPORTED
+\X	extended Unicode sequence NOT SUPPORTED
+
+\%d123	decimal character 123 NOT SUPPORTED vim
+\%xFF	hex character FF NOT SUPPORTED vim
+\%o123	octal character 123 NOT SUPPORTED vim
+\%u1234	Unicode character 0x1234 NOT SUPPORTED vim
+\%U12345678	Unicode character 0x12345678 NOT SUPPORTED vim
+
+(?=re)	before text matching «re» NOT SUPPORTED
+(?!re)	before text not matching «re» NOT SUPPORTED
+(?<=re)	after text matching «re» NOT SUPPORTED
+(?<!re)	after text not matching «re» NOT SUPPORTED
+re&	before text matching «re» NOT SUPPORTED vim
+re@=	before text matching «re» NOT SUPPORTED vim
+re@!	before text not matching «re» NOT SUPPORTED vim
+re@<=	after text matching «re» NOT SUPPORTED vim
+re@<!	after text not matching «re» NOT SUPPORTED vim
+\zs	sets start of match (= \K) NOT SUPPORTED vim
+\ze	sets end of match NOT SUPPORTED vim
+\%^	beginning of file NOT SUPPORTED vim
+\%$	end of file NOT SUPPORTED vim
+\%V	on screen NOT SUPPORTED vim
+\%#	cursor position NOT SUPPORTED vim
+\%'m	mark «m» position NOT SUPPORTED vim
+\%23l	in line 23 NOT SUPPORTED vim
+\%23c	in column 23 NOT SUPPORTED vim
+\%23v	in virtual column 23 NOT SUPPORTED vim
+
+x{}	(== x*) NOT SUPPORTED vim
+x{-}	(== x*?) NOT SUPPORTED vim
+x{-n}	(== x{n}?) NOT SUPPORTED vim
+x=	(== x?) NOT SUPPORTED vim
+x*+	zero or more «x», possessive NOT SUPPORTED
+x++	one or more «x», possessive NOT SUPPORTED
+x?+	zero or one «x», possessive NOT SUPPORTED
+x{n,m}+	«n» or ... or «m» «x», possessive NOT SUPPORTED
+x{n,}+	«n» or more «x», possessive NOT SUPPORTED
+x{n}+	exactly «n» «x», possessive NOT SUPPORTED
+(?<name>re)	named & numbered capturing group (submatch) NOT SUPPORTED
+(?'name're)	named & numbered capturing group (submatch) NOT SUPPORTED
+(?#text)	comment NOT SUPPORTED
+(?|x|y|z)	branch numbering reset NOT SUPPORTED
+(?>re)	possessive match of «re» NOT SUPPORTED
+re@>	possessive match of «re» NOT SUPPORTED vim
+%(re)	non-capturing group NOT SUPPORTED vim
+\G	at beginning of subtext being searched NOT SUPPORTED pcre
+\G	at end of last match NOT SUPPORTED perl
+\Z	at end of text, or before newline at end of text NOT SUPPORTED
+
